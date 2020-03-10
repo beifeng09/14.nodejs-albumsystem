@@ -1,0 +1,101 @@
+
+#chat .list {
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 600px;
+    border-radius: 10px;
+    background: url("../imgs/chatbg6.jpg") center;
+}
+#chatSend {
+    background-color: skyblue;
+    color: #FFFFFF;
+}
+
+#chat .list > div {
+    height: 100%;
+}
+#chat .operate {
+    display: flex;
+    height: 40px;
+}
+#chat .operate input[type="text"] {
+    flex: 3;
+    border: 1px solid skyblue;
+}
+#chat .operate input[type="button"] {
+    flex: 1;
+}
+#userList {
+    height: 100%;
+    overflow: auto;
+    border-right: 1px solid #FFFFFF;
+    padding-left:0px;
+}
+#userList li {
+    padding: 0;
+    display: flex;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #FFFFFF;
+    cursor: pointer;
+}
+#userList li span:first-child {
+    flex: 1;
+    text-align: center;
+
+}
+#userList li span:last-child {
+    flex: 2;
+    text-align: center;
+
+}
+#userList li span.ellipsis {
+    color: #FFFFFF;
+}
+#userList li span img {
+    max-width: 60%;
+    max-height: 60%;
+    border-radius: 50%;
+}
+#wordList {
+    height: 100%;
+    overflow: auto;
+}
+#wordList li {
+    position: relative;
+    width: 85%;
+    margin-top: 15px;
+    border-radius: 3px;
+    background-color: skyblue;
+    color: #fff;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 26px;
+}
+
+.face {
+    position: relative;
+    width: 100px;
+    height: 30px;
+}
+
+.face span {
+    width: 50px;
+    height: 30px;
+    background-color: orange;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+}
+.face #faceList {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 240px;
+    height: 216px;
+}
+.face #faceList li {
+    float: left;
+}

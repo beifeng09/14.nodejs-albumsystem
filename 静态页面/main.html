@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layui.css">
+</head>
+<body>
+    <!--header部分-->
+    <header>
+        <!--版心-->
+        <div class="inner">
+            <!--logo-->
+            <h1 class="logo">
+                <a href="#" title="">logo</a>
+            </h1>
+            <!--搜索框-->
+            <div class="searchBox">
+                <form action="" method="get">
+                    <input type="text" class="search" name="keyword" id="keyword" placeholder="请输入想搜索的相册名">
+                    <input type="submit" class="searchBtn bBg">
+                </form>
+            </div>
+            <ul class="top-menu">
+                <li>
+                    <a href="#">
+                        <i class="head-vip-icon"></i>
+                        个人VIP
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="head-vip-icon"></i>
+                        充值中心
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        消息
+                        <i class="alert">5</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!--content部分-->
+    <div class="content inner">
+        <div class="users">
+            <div class="personal">
+                <!--用户头像-->
+                <div class="head-pic">
+                    <img src="imgs/head_pic.jpg" alt="">
+                </div>
+                <!--昵称-->
+                <p class="nick-name"><%nike_name%></p>
+                <p>ID: ickt2019</p>
+                <ul class="vip-iconBox">
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+            <!--个人信息部分-->
+            <div class="user-info">
+                <ul>
+                    <li><a href="#">个人信息</a></li>
+                    <li><a href="#">安全设置</a></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">全部相册</li>
+                    <li>我的相册</li>
+                    <li>相册管理</li>
+                    <li>社区聊天室</li>
+                </ul>
+                <div class="layui-tab-content" style="height: 710px;">
+                    <!--全部相册部分-->
+                    <div class="layui-tab-item layui-show">全部相册</div>
+
+                    <!--我的相册部分-->
+                    <div class="layui-tab-item">我的相册</div>
+
+                    <!--相册管理部分-->
+                    <div class="layui-tab-item">相册管理</div>
+
+                    <!--社区聊天室-->
+                    <div class="layui-tab-item">社区聊天室</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--footer部分-->
+    <footer>
+        <!--版权-->
+        <div class="copyright">
+            <p>穗公网监备案证第44010650010167&nbsp;&nbsp;   互联网信息服务资格证编号（京）-非经营性-2012-0018 &nbsp;&nbsp;京公网安备 44010602000141号</p>
+            <p>Copyright &nbsp; © &nbsp; 2019 Could-Inc.All Rights Reserved<a  class="icon1" href="#"></a></p>
+        </div>
+    </footer>
+
+    <script src="./layui/layui.all.js" ></script>
+
+</body>
+</html>

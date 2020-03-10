@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CloudAlbum - 记录生活美一个瞬间</title>
+    <link rel="shortcut icon" href="./favicon.ico"/>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+
+<div id="content" style="height: 600px">
+    <div class="container">
+        <div class="row">
+            <form id="loginForm" class="text-center hide">
+                <div class="title">用户登录</div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" autocomplete="off"  placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <button type="button" id="loginFormBtn" class="btn btn-secondary">登录</button>
+                    <button type="button" class="btn btn-secondary" id="goRegist">去注册</button>
+                </div>
+            </form>
+            <form id="registForm" class="text-center">
+                <div class="title">用户注册</div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" id="registFormUsernameInp" autocomplete="off"  placeholder="请输入用户名">
+                </div>
+                <span id="userNameError"></span>
+                <div class="form-group">
+                    <input type="password" name="password" id="registFormPasswordInp" class="form-control" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="repassword" id="registFormPasswordInpRepeat" class="form-control" placeholder="请再次确认密码">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn" id="registFormBtn">注册</button>
+                    <button type="button" class="btn" id="goLogin">去登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="./sea.js"></script>
+<script src="./js/seajs-preload.js"></script>
+<script src="./js/seajs-css.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./layui/layui.all.js"></script>
+<script>
+
+    seajs.use('./modules/index/index_main.js');
+
+</script>
+
+</body>
+</html>

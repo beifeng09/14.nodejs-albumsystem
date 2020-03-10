@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CloudAlbum - 记录生活美一个瞬间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/web/favicon.ico"/>
+    <link rel="stylesheet" href="/web/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/web/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/reset.css">
+    <link rel="stylesheet" href="/web/css/common.css">
+    <link rel="stylesheet" href="/web/css/main.css">
+    <link rel="stylesheet" href="/web/css/cropper.min.css">
+    <link rel="stylesheet" href="/web/css/ImgCropping.css">
+    <link rel="stylesheet" href="/web/css/liaotian.css">
+    <link rel="stylesheet" href="/web/css/allphoto.css">
+    <link rel="stylesheet" href="/web/css/alluserPic_main.css">
+    <link rel="stylesheet" href="/web/css/liuyan.css">
+    <style>
+    </style>
+</head>
+
+<body>
+<!--header部分-->
+<header>
+    <!--版心-->
+    <div class="inner">
+        <!--logo-->
+        <h1 class="logo">
+            <a href="#" title="CloudAlbum - 记录生活美一个瞬间">logo</a>
+        </h1>
+        <!--搜索框-->
+        <div class="searchBox">
+            <form action="" method="get">
+                <input type="text" class="search" name="keyword" id="keyword" placeholder="请输入想搜索的相册名">
+                <input type="submit" class="searchBtn bBg">
+            </form>
+        </div>
+        <ul class="top-menu">
+            <li>
+                <a href="#">
+                    <i class="head-vip-icon"></i>
+                    个人VIP
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="head-vip-icon"></i>
+                    充值中心
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    消息
+                    <i class="new-msg">5</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!--content部分-->
+<div class="content inner">
+    <!--users部分-->
+    <div class="users">
+        <div class="personal">
+            <!--用户头像-->
+            <div class="head-pic">
+                <img id="headPic" src="<%= head_pic %>" alt="">
+            </div>
+            <!--昵称-->
+            <p class="nick-name" id="nickName"><%= nick_name %></p>
+            <p>ID：<%= username %></p>
+            <ul class="vip-iconBox">
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+                <li><a href="javascript:;"></a></li>
+            </ul>
+        </div>
+        <!--个人信息部分-->
+        <div class="user-info">
+            <ul>
+                <li><a href="javascript:;" id="showUserInfo">个人信息设置</a></li>
+                <li><a href="javascript:;" id="updateNewHeadPic">更换头像</a></li>
+                <li><a href="/exit">退出</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--main部分-->
+    <div class="main">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+
+            <!--ul导航-->
+            <ul class="layui-tab-title" id="tabList">
+                <li class="layui-this" id="showhomeou">全部相册</li>
+                <li>我的相册</li>
+                <li>社区聊天室</li>
+            </ul>
+
+            <!--TabContent内容-->
+            <div class="layui-tab-content" style="height: 710px;" id="allTabsContent">
+
+                <!--全部相册部分-->
+                <div class="layui-tab-item layui-show">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <ul id="allUsername" class="allName">
+                            <% for(var i = 0; i < allUserInfoArr.length; i++) { %>
+                            <li class="c" data-username="<%= allUserInfoArr[i].username%>">
+                                <div class="user-pic" >
+                                    <img  src="<%= allUserInfoArr[i].head_pic %>" alt="">
+                                </div>
+                                <p>
+                                    <a href="javascript:;" id="name1">
+                                        <%= allUserInfoArr[i].nick_name%>
+                                    </a>
+                                </p>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--我的相册部分-->
+                <div class="layui-tab-item" id="myAlbum">
+                    <!-- 相册管理开始 -->
+                    <div role="tabpanel" class="tab-pane album-manage" id="albumManage">
+                        <!--上传图片按钮-->
+                        <button id="UploadSelectAlbums" type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#uploadModal">上传照片
+                        </button>
+                        <!--创建相册按钮-->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            创建相册
+                        </button>
+                    </div>
+                    <!-- 相册管理结束 -->
+                    <!--显示我的所有相册ul-->
+                    <ul class="show-myAlbums" id="showMyAlbums">
+                        <% for (var i = 0; i < userAlbumArr.length; i++) { %>
+                        <li class="show-myAlbums-album" data-album-name="<%= userAlbumArr[i].album_name %>">
+                            <button type="button" class="close" aria-label="Close"><span aria-hidden="true"
+                                                                                         class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <div>
+                                <img src="<%=userAlbumArr[i].img%>" alt="">
+                            </div>
+                            <div class="albumName">
+                                <span class="album-name"><%= userAlbumArr[i].album_name %></span>
+                            </div>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+                <!--社区聊天室-->
+                <div class="layui-tab-item">
+                    <div role="tabpanel" class="tab-pane clearfix" id="chat">
+                        <!-- 列表区域 -->
+                        <div class="list">
+                            <!-- 左侧 用户名列表 -->
+                            <div class="col-lg-2">
+                                <ul id="userList">
+                                </ul>
+                            </div>
+                            <!-- 右侧 发言列表 -->
+                            <div class="col-lg-10">
+                                <ul id="wordList">
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 表情区域 -->
+                        <div class="face">
+                            <span>表情</span>
+                            <ul id="faceList">
+                                <% for (var i = 0; i < faceArr.length; i++) { %>
+                                <li data-code="<%= faceArr[i].code %>"><img src="<%= faceArr[i].path %>" alt=""></li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <!-- 与谁聊天 -->
+                        <div class="mode">
+                            <span>当前的聊天对象</span>
+                            <select id="mode">
+                                <option value="public">公共聊天</option>
+                                <option value="private">私聊</option>
+                            </select>
+                            <span id="target">所有人</span>
+                        </div>
+                        <!-- 操作区域 -->
+                        <div class="operate">
+                            <input type="text" id="chatInp">
+                            <button type="button" class="btn btn-lg" id="chatSend">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--展示图片div-->
+            <div style="display: none" id="showMyImgs">
+                <ul class="clearfix show-imgs" id="showImgs">
+                </ul>
+            </div>
+
+            <!-- 所以用户展示相册DIV -->
+            <div style="display: none" id="ouya">
+
+            </div>
+
+            <!--个人信息设置div-->
+            <div class="personal-info" style="display: none" id="personalInfo">
+                <h2>个人信息设置</h2>
+                <form class="layui-form" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">昵称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="nick_name" lay-verify="required|nick_name" placeholder="请输入昵称"
+                                   autocomplete="off" class="layui-input" id="nickNameInp">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">请输入2-8位中文、数字、英文</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="男" title="男" checked="">
+                            <input type="radio" name="sex" value="女" title="女">
+                            <input type="radio" name="sex" value="保密" title="保密">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">手机</label>
+                            <div class="layui-input-inline">
+                                <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="email" lay-verify="email" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">生日</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">家乡</label>
+                        <div class="layui-input-inline">
+                            <select name="quiz1">
+                                <option value="">请选择省</option>
+                                <option value="浙江" selected="">浙江省</option>
+                                <option value="江西">江西省</option>
+                                <option value="福建">福建省</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="quiz2">
+                                <option value="">请选择市</option>
+                                <option value="杭州">杭州</option>
+                                <option value="宁波">宁波</option>
+                                <option value="温州">温州</option>
+                                <option value="温州">台州</option>
+                                <option value="温州">绍兴</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="quiz3">
+                                <option value="">请选择县/区</option>
+                                <option value="西湖区">西湖区</option>
+                                <option value="余杭区">余杭区</option>
+                                <option value="拱墅区">临安市</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" pane="">
+                        <label class="layui-form-label">爱好</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+                            <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+                            <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">修改密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" name="password" lay-verify="required|pass" placeholder="请输入密码"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">个性签名</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" name="aboutMe" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="userInfo" id="submitInfo">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--图片裁剪框 start-->
+            <div style="display: none" class="tailoring-container">
+                <div class="black-cloth" onclick="closeTailor(this)"></div>
+                <div class="tailoring-content">
+                    <div class="tailoring-content-one">
+                        <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                            <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg"
+                                   class="hidden" onchange="selectImg(this)">
+                            选择图片
+                        </label>
+                        <div class="close-tailoring" onclick="closeTailor(this)">×</div>
+                    </div>
+                    <div class="tailoring-content-two">
+                        <div class="tailoring-box-parcel">
+                            <img id="tailoringImg">
+                        </div>
+                        <div class="preview-box-parcel">
+                            <p>图片预览：</p>
+                            <div class="square previewImg"></div>
+                            <div class="circular previewImg"></div>
+                        </div>
+                    </div>
+                    <div class="tailoring-content-three">
+                        <button class="l-btn cropper-reset-btn">复位</button>
+                        <button class="l-btn cropper-rotate-btn">旋转</button>
+                        <button class="l-btn cropper-scaleX-btn">换向</button>
+                        <button class="l-btn sureCut" id="sureCut">确定</button>
+                    </div>
+                </div>
+            </div>
+            <!--图片裁剪框 end-->
+        </div>
+    </div>
+</div>
+<!--footer部分-->
+<footer>
+    <!--版权-->
+    <div class="copyright">
+        <p>穗公网监备案证第44010650010167&nbsp;&nbsp; 互联网信息服务资格证编号（京）-非经营性-2012-0018 &nbsp;&nbsp;京公网安备 44010602000141号</p>
+        <p>Copyright &nbsp; © &nbsp; 2019 Could-Inc.All Rights Reserved<a class="icon1" href="#"></a></p>
+    </div>
+</footer>
+<!--重命名模态框-->
+<div class="modal fade" id="renameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">请输入新的图片名称</h4>
+            </div>
+            <div class="modal-body">
+                <form id="renameModalForm">
+                    <!-- hidden 不会在页面中显示，通过设置value来传递数据-->
+                    <input type="hidden" name="album_name" value="">
+                    <input type="hidden" name="img_name" value="">
+                    <div class="form-group">
+                        <input type="text" name="newImgName">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="renameModalFormBtn">确定修改</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!--上传图片模态框-->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
+    <div class="modal-dialog" role="document" style="margin-top: 150px;">
+        <div class="modal-content">
+            <div class="modal-header header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                  class="glyphicon glyphicon-remove"></span>
+                </button>
+                <h4 class="modal-title" id="uploadModalLabel">上传照片</h4>
+            </div>
+            <div class="modal-body modal-dody-select">
+                <form>
+                    <h5 class="text-left">选择文件夹</h5>
+                    <select id="uploadSelect" class="form-control upload-select" type="text">
+                        <% for (var i = 0; i < userAlbumArr.length; i++) { %>
+                        <option value="<%= userAlbumArr[i].album_name %>">
+                            <%= userAlbumArr[i].album_name %>
+                        </option>
+                        <% } %>
+                    </select>
+                </form>
+                <div class="input-group upload-select-album">
+                    <form id="uploadForm" class="upload-form-imgs">
+                        <!-- image/* 所有图片 -->
+                        <input type="file" accept="image/*" id="uploadFile" name="file" class="form-control"
+                               multiple="multiple"/>
+                    </form>
+                    <span class="input-group-btn">
+                            <button class="btn btn-default" id="uploadBtn" type="button">上传</button>
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 创建相册模态框 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document" style="margin-top: 150px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                  class="glyphicon glyphicon-remove"></span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">创建相册</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">相册名称：</label>
+                        <input type="text" class="form-control" id="createInp">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">相册描述：</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="height: 110px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+                <button type="button" class="btn btn-default" id="createBtn">创建</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/web/js/jquery.min.js"></script>
+<script src="/web/js/bootstrap.min.js"></script>
+<script src="/web/layui/layui.all.js"></script>
+<script src="/web/sea.js"></script>
+<script src="/web/js/seajs-css.js"></script>
+<script src="/web/js/cropper.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    seajs.use('modules/main/main_main.js');
+</script>
+<script>
+    //弹出框水平垂直居中
+    (window.onresize = function () {
+        var win_height = $(window).height();
+        var win_width = $(window).width();
+        if (win_width <= 768) {
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+                "left": 0
+            });
+        } else {
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+                "left": (win_width - $(".tailoring-content").outerWidth()) / 2
+            });
+        }
+    })();
+
+
+    //弹出图片裁剪框
+    $('#updateNewHeadPic').on("click", function () {
+        $(".tailoring-container").toggle();
+    });
+
+
+    //图像上传
+    function selectImg(file) {
+        if (!file.files || !file.files[0]) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var replaceSrc = evt.target.result;
+            //更换cropper的图片
+            $('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+        };
+        reader.readAsDataURL(file.files[0]);
+    }
+
+    //cropper图片裁剪
+    $('#tailoringImg').cropper({
+        aspectRatio: 1 / 1, //默认比例
+        preview: '.previewImg', //预览视图
+        guides: true, //裁剪框的虚线(九宫格)
+        autoCropArea: 0.5, //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+        movable: false, //是否允许移动图片
+        dragCrop: true, //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+        // movable: true,  //是否允许移动剪裁框
+        resizable: true, //是否允许改变裁剪框的大小
+        zoomable: true, //是否允许缩放图片大小
+        mouseWheelZoom: true, //是否允许通过鼠标滚轮来缩放图片
+        touchDragZoom: true, //是否允许通过触摸移动来缩放图片
+        rotatable: true, //是否允许旋转图片
+        crop: function (e) {
+            // 输出结果数据裁剪图像。
+        }
+    });
+    //旋转
+    $(".cropper-rotate-btn").on("click", function () {
+        $('#tailoringImg').cropper("rotate", 45);
+    });
+    //复位
+    $(".cropper-reset-btn").on("click", function () {
+        $('#tailoringImg').cropper("reset");
+    });
+    //换向
+    var flagX = true;
+    $(".cropper-scaleX-btn").on("click", function () {
+        if (flagX) {
+            $('#tailoringImg').cropper("scaleX", -1);
+            flagX = false;
+        } else {
+            $('#tailoringImg').cropper("scaleX", 1);
+            flagX = true;
+        }
+        flagX != flagX;
+    });
+
+
+
+
+
+    //裁剪后的处理
+    $("#sureCut").on("click", function () {
+        if ($("#tailoringImg").attr("src") == null) {
+            return false;
+        } else {
+            var cas = $('#tailoringImg').cropper('getCroppedCanvas'); //获取被裁剪后的canvas
+            var base64url = cas.toDataURL('image/jpg'); //转换为base64地址形式
+            $("#headPic").prop("src", base64url); //显示为图片的形式
+
+            //编码后上传服务器
+            uploadFile(base64url);
+
+            //关闭裁剪框
+            closeTailor();
+            // 自动刷新页面
+            window.location.reload();
+        }
+    });
+
+    //关闭裁剪框
+    function closeTailor() {
+        $(".tailoring-container").toggle();
+    }
+
+    // ajax请求上传
+    function uploadFile(file) {
+        $.ajax({
+            url: '/updateHeadPic',
+            type: 'post',
+            data: {
+                file: file
+            },
+            // async : true,
+            dataType: 'json',
+            success: function (data) {
+                if (!data.error) {
+                    // 提示弹框
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.msg(data.data, {
+                            time: 1000
+                        });
+                    });
+                }
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

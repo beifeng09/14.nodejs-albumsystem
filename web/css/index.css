@@ -1,0 +1,65 @@
+body {
+    background: url("../imgs/bg.jpg") no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+
+}
+.header-title {
+    text-align: right;
+}
+
+/* 注册表单start */
+#registForm .title {
+    font-size: 25px;
+    color: #FFFFFF;
+}
+#registForm {
+    box-sizing: border-box;
+    padding: 0 30px;
+    width: 400px;
+    margin: 0 auto;
+    border: 2px solid #eee;
+    margin-top: 150px;
+    border-radius: 25px;
+    /*color: #FFFFFF;*/
+}
+#registForm input {
+    border-color: #eee;
+    color: #000000;
+}
+#loginForm .title {
+    font-size: 25px;
+    color: #FFFFFF;
+}
+#loginForm {
+    box-sizing: border-box;
+    padding: 0 30px;
+    width: 400px;
+    margin: 0 auto;
+    border: 2px solid #eee;
+    margin-top: 150px;
+    border-radius: 25px;
+}
+.form-group {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.form-group:last-child {
+    border: none;
+}
+.form-control {
+    height: 30px;
+    background-color: #eee;
+    opacity: 0.5;
+}
+.btn {
+    line-height: 1;
+    background-color: #FFFFFF;
+    /*outline: #FFFFFF;*/
+}
+#registForm .btn:first-child {
+    margin-right: 20px;
+}
+/* 注册表单end */
